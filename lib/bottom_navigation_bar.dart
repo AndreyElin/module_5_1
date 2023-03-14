@@ -37,17 +37,24 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
   }
 
   @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter Demo Home Page'),
         actions: [
           Builder(
-              builder: (context) => IconButton(
-                  onPressed: () {
-                    Scaffold.of(context).openEndDrawer();
-                  },
-                  icon: const Icon(Icons.person)),
+            builder: (context) =>
+                IconButton(
+                    onPressed: () {
+                      Scaffold.of(context).openEndDrawer();
+                    },
+                    icon: const Icon(Icons.person)),
           ),
         ],
       ),
@@ -119,43 +126,44 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
                 topLeft: Radius.circular(20),
               ),
             ),
-            builder: (context) => SizedBox(
-              height: 200,
-              child: Center(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Spacer(
-                          flex: 1,
+            builder: (context) =>
+                SizedBox(
+                  height: 200,
+                  child: Center(
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: const [
+                            Spacer(
+                              flex: 1,
+                            ),
+                            Icon(Icons.credit_card),
+                            Spacer(
+                              flex: 1,
+                            ),
+                            Text('Сумма:'),
+                            Spacer(
+                              flex: 8,
+                            ),
+                            Text('200 руб'),
+                            Spacer(
+                              flex: 1,
+                            ),
+                          ],
                         ),
-                        Icon(Icons.credit_card),
-                        Spacer(
-                          flex: 1,
+                        const SizedBox(
+                          height: 30,
                         ),
-                        Text('Сумма:'),
-                        Spacer(
-                          flex: 8,
-                        ),
-                        Text('200 руб'),
-                        Spacer(
-                          flex: 1,
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: const Text('Оплатить'),
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Оплатить'),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
           );
         },
         child: const Icon(Icons.add),
